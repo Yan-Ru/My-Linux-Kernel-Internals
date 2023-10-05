@@ -1,0 +1,18 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    overlay-name = "My DT Overlay Example";
+    jetson-header-name = "Jetson AGX Xavier CSI Connector";
+    compatible = "nvidia,p2822-0000+p2888-0001", "nvidia,tegra194";
+ 
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            my_device0 {
+                compatible = "harrison_device";
+                my-custom-property = "This Is My Overlay";
+            };
+        };
+    };
+};

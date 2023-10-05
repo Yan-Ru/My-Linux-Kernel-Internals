@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "platform_device.h": "c",
+        "of_gpio.h": "c",
+        "gpio.h": "c",
+        "module.h": "c",
+        "interrupt.h": "c",
+        "device.h": "c",
+        "delay.h": "c",
+        "of_device.h": "c"
+    }
+}

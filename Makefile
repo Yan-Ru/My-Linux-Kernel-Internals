@@ -7,5 +7,7 @@ all:
 	make ARCH=$(ARCH) -C $(KERN_DIR) M=$(PWD) modules
 clean:
 	make ARCH=$(ARCH) -C $(KERN_DIR) M=$(PWD) clean
+clean_dtbo:	
+	@rm -rf *.dtbo
 help:
 	make ARCH=$(ARCH) -C $(KERN_DIR) M=$(PWD) help
