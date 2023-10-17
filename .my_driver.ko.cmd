@@ -1,0 +1,1 @@
+cmd_/home/rqx-58g/my_driver_example/my_driver.ko := ld -EL -r  -T ./scripts/module-common.lds -T ./arch/arm64/kernel/module.lds --build-id  -o /home/rqx-58g/my_driver_example/my_driver.ko /home/rqx-58g/my_driver_example/my_driver.o /home/rqx-58g/my_driver_example/my_driver.mod.o ;  true
