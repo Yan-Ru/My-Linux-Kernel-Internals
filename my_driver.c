@@ -12,18 +12,12 @@ enum pcdev_names {
     MYDEVICE4
 };
 
-/* Module's init entry point */
-int __init helloworld_init(void) {
-    pr_info("Hello world\n"); // Removed KERN_INFO
-    return 0;
-}
-
-int _platform_driver_remove(struct platform_device *pdev) { // Corrected the function name
+int my_platform_driver_remove(struct platform_device *pdev) { 
     pr_info("A device is removed\n");
     return 0;
 }
 
-int _platform_driver_probe(struct platform_device *pdev) { // Corrected the function name
+int my_platform_driver_probe(struct platform_device *pdev) {
     pr_info("A device is detected\n");
     return 0;
 }
@@ -33,33 +27,40 @@ const struct of_device_id dev_dt_match[] = {
     { /* sentinel */ }
 };
 
-struct platform_device_id _platform_device_id[] = {
+struct platform_device_id my_platform_device_id[] = {
     { .name = "my_device1", .driver_data = MYDEVICE1 },
-    { .name = "my_device2", .driver_data = MYDEVICE2 },
-    { .name = "my_device3", .driver_data = MYDEVICE3 },
-    { .name = "my_device4", .driver_data = MYDEVICE4 },
     {}
 };
 
-struct platform_driver _platform_driver = {
-    .probe  = _platform_driver_probe,  // Corrected the function name
-    .remove = _platform_driver_remove,  // Corrected the function name
-	.id_table = _platform_device_id,
+struct platform_driver my_platform_driver = {
+    .probe  = my_platform_driver_probe,  
+    .remove = my_platform_driver_remove,
+	.id_table = my_platform_device_id,
     .driver = {
         .name = DRIVER_NAME,
         .of_match_table = dev_dt_match
     }
 };
 
-/* Module's cleanup entry point */
-void __exit helloworld_cleanup(void) {
-    pr_info("Goodbye world\n"); // Removed KERN_INFO
+/* Module's init entry point */
+int __init helloworld_init(void) {
+    pr_info("Hello world\n");
+    //platform_driver_register(&my_platform_driver);
+    return 0;
 }
 
-module_init(helloworld_init);
-module_exit(helloworld_cleanup);
+/* Module's cleanup entry point */
+void __exit helloworld_cleanup(void) {
+    pr_info("Goodbye world\n");
+    //platform_driver_unregister(&my_platform_driver);
+}
+
+module_platform_driver(my_platform_driver);
+// module_init(helloworld_init);
+// module_exit(helloworld_cleanup);
 
 MODULE_LICENSE("GPL");
+MODULE_VERSION("1.0.0");
 MODULE_AUTHOR("Harrison");
 MODULE_DESCRIPTION("A simple hello world kernel module");
 MODULE_ALIAS("platform:harrison_device");  // Add this line to specify an alias for the device
