@@ -13,12 +13,12 @@ enum pcdev_names {
 };
 
 int my_platform_driver_remove(struct platform_device *pdev) { 
-    pr_info("A device is removed\n");
+    printk("A device is removed\n");
     return 0;
 }
 
 int my_platform_driver_probe(struct platform_device *pdev) {
-    pr_info("A device is detected\n");
+    printk("A device is detected\n");
     return 0;
 }
 
@@ -44,20 +44,20 @@ struct platform_driver my_platform_driver = {
 
 /* Module's init entry point */
 int __init helloworld_init(void) {
-    pr_info("Hello world\n");
-    //platform_driver_register(&my_platform_driver);
+    printk("Hello world\n");
+    platform_driver_register(&my_platform_driver);
     return 0;
 }
 
 /* Module's cleanup entry point */
 void __exit helloworld_cleanup(void) {
-    pr_info("Goodbye world\n");
-    //platform_driver_unregister(&my_platform_driver);
+    printk("Goodbye world\n");
+    platform_driver_unregister(&my_platform_driver);
 }
 
-module_platform_driver(my_platform_driver);
-// module_init(helloworld_init);
-// module_exit(helloworld_cleanup);
+// module_platform_driver(my_platform_driver);
+module_init(helloworld_init);
+module_exit(helloworld_cleanup);
 
 MODULE_LICENSE("GPL");
 MODULE_VERSION("1.0.0");

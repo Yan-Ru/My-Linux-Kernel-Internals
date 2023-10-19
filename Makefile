@@ -1,5 +1,5 @@
 obj-m := my_driver.o
-ARCH=arm64
+ARCH ?= $(shell uname -m)
 DT_FILE=my_device
 #set KERN_DIR to linux source location 
 KERN_DIR = /lib/modules/$(shell uname -r)/build/
